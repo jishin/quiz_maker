@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_maker/views/sign_in.dart';
+import 'package:quiz_maker/views/sign_up.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignIn(),
+      home: SignUp(),
     );
   }
 }
