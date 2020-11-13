@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/auth.dart';
+import 'package:quiz_maker/views/home.dart';
 import 'package:quiz_maker/views/sign_up.dart';
 import 'package:quiz_maker/widgets/widget.dart';
 
@@ -12,6 +14,28 @@ class _SignInState extends State<SignIn> {
 
   final _formKey = GlobalKey<FormState>();
   String email, password;
+  AuthService authService = new AuthService();
+
+  bool _isLoading = false;
+
+
+  signIn() async{
+    if(_formKey.currentState.validate()){
+      setState(() {
+        _isLoading=true;
+      });
+      await authService.signInEmailAndPassword(email, password).then((value){
+        if(value!=null){
+          setState(() {
+            _isLoading=false;
+          });
+          Navigator.pushReplacement((context), MaterialPageRoute(builder: (context)=>Home()));
+        }
+      });
+
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,73 +46,114 @@ class _SignInState extends State<SignIn> {
         elevation: 0,
         brightness: Brightness.light,
       ),
-      body: Form(
+
+
+      body: _isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ) : Form(
         key: _formKey,
-        child: Container(
-          //color: Colors.blue,
-          margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: Column(
-            children: [
-              Spacer(),
-              TextFormField(
-                validator: (val){
-                 return val.isEmpty ?  "Enter correct email" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "Email",
-                ),
-                onChanged: (val){
-                  email = val;
-                },
-              ),
-              SizedBox(height: 20,),
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Enter correct password" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "password",
-                ),
-                onChanged: (val){
-                  email = val;
-                },
-              ),
-              SizedBox(height: 20,),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width - 48,
-                child: Text("sign In",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+
+          child: Container(
+            //height: MediaQuery.of(context).size.height-50,
+            alignment: Alignment.bottomCenter,
+
+            padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
+            child: Container(
+
+              //color: Colors.blue,
+              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              child: Column(
                 children: [
-                  Text("Don't have an account? ", style: TextStyle(
-                    fontSize: 15,
-                  ),),
+
+                  //Spacer(),
+
+
+                  TextFormField(
+                    validator: (val){
+                     return val.isEmpty ?  "Enter correct email" : null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Email",
+                    ),
+                    onChanged: (val){
+                      email = val;
+                    },
+                  ),
+
+
+                  SizedBox(height: 20,),
+
+
+                  TextFormField(
+                    obscureText: true,
+                    validator: (val){
+                      return val.isEmpty ?  "Enter correct password" : null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "password",
+                    ),
+                    onChanged: (val){
+                      password = val;
+                    },
+                  ),
+
+
+                  SizedBox(height: 20,),
+
+
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUp()));
+                      signIn();
                     },
-                    child: Text("Sign Up", style: TextStyle(
-                      fontSize: 15,
-                      decoration: TextDecoration.underline,
-                    ),),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(30)
+                      ),
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width - 48,
+                      child: Text("sign In",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
+
+
+                  SizedBox(height: 20,),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      Text("Don't have an account? ", style: TextStyle(
+                        fontSize: 15,
+                      ),),
+
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUp()));
+                        },
+                        child: Text("Sign Up", style: TextStyle(
+                          fontSize: 15,
+                          decoration: TextDecoration.underline,
+                        ),),
+                      ),
+                    ],
+                  ),
+
+
+                  SizedBox(height: 150,),
                 ],
               ),
-              SizedBox(height: 150,),
-            ],
+            ),
           ),
         ),
       ),
