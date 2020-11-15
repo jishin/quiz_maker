@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/helper/funtions.dart';
 import 'package:quiz_maker/services/auth.dart';
 import 'package:quiz_maker/views/home.dart';
 import 'package:quiz_maker/views/sign_up.dart';
@@ -29,6 +30,8 @@ class _SignInState extends State<SignIn> {
           setState(() {
             _isLoading=false;
           });
+          HelperFunctions.saveUserLoggedInDetails(isLoggedin: true);
+
           Navigator.pushReplacement((context), MaterialPageRoute(builder: (context)=>Home()));
         }
       });
@@ -108,7 +111,10 @@ class _SignInState extends State<SignIn> {
                     onTap: (){
                       signIn();
                     },
-                    child: blueButton(context, "Sign In")
+                    child: blueButton(
+                        context:  context,
+                        input: "Sign In"
+                    )
                   ),
 
 

@@ -5,6 +5,7 @@ import 'package:quiz_maker/widgets/widget.dart';
 import 'package:random_string/random_string.dart';
 
 class CreateQuiz extends StatefulWidget {
+
   @override
   _CreateQuizState createState() => _CreateQuizState();
 }
@@ -32,7 +33,9 @@ class _CreateQuizState extends State<CreateQuiz> {
       await databaseService.addQuizData(quizMap, quizId).then((value){
         setState(() {
           _isLoading = false;
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> AddQuestion()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> AddQuestion(
+            quizId: quizId
+          )));
 
         });
       });
@@ -55,63 +58,69 @@ class _CreateQuizState extends State<CreateQuiz> {
         child: Center(child: CircularProgressIndicator(),),
       ) : Form(
           key: _formKey,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: Column(
-              children: [
-                TextFormField(
-                  validator: (val){
-                    return val.isEmpty ?  "Enter Image URL" : null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Quiz Image Url",
+          child: SingleChildScrollView(
+
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (val){
+                      return val.isEmpty ?  "Enter Image URL" : null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Quiz Image Url",
+                    ),
+                    onChanged: (val){
+                      //todo
+                      quizImageUrl = val;
+                    },
                   ),
-                  onChanged: (val){
-                    //todo
-                    quizImageUrl = val;
-                  },
-                ),
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
 
-                TextFormField(
-                  validator: (val){
-                    return val.isEmpty ?  "Enter Quiz Title" : null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Quiz Title",
+                  TextFormField(
+                    validator: (val){
+                      return val.isEmpty ?  "Enter Quiz Title" : null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Quiz Title",
+                    ),
+                    onChanged: (val){
+                      //todo
+                      quizTitle = val;
+                    },
                   ),
-                  onChanged: (val){
-                    //todo
-                    quizTitle = val;
-                  },
-                ),
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
 
-                TextFormField(
-                  validator: (val){
-                    return val.isEmpty ?  "Enter Description" : null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Enter Description",
+                  TextFormField(
+                    validator: (val){
+                      return val.isEmpty ?  "Enter Description" : null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Enter Description",
+                    ),
+                    onChanged: (val){
+                      //todo
+                      quizDescription = val;
+                    },
                   ),
-                  onChanged: (val){
-                    //todo
-                    quizDescription = val;
-                  },
-                ),
 
 
-                Spacer(),
+                  SizedBox(height: 150,),
 
-                GestureDetector(
-                  onTap: (){
-                    createQuizOnline();
-                  },
-                    child: blueButton(context, "Create Quiz")),
+                  GestureDetector(
+                    onTap: (){
+                      createQuizOnline();
+                    },
+                      child: blueButton(
+                          context:  context,
+                          input: "Create Quiz"
+                      )),
 
-                SizedBox(height: 20,)
+                  SizedBox(height: 20,)
 
-              ],
+                ],
+              ),
             ),
           )
       ),
