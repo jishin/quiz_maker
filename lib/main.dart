@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quiz_maker/helper/funtions.dart';
 import 'package:quiz_maker/views/home.dart';
 import 'package:quiz_maker/views/sign_in.dart';
-import 'package:quiz_maker/views/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async{

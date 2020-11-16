@@ -54,109 +54,112 @@ class _AddQuestionState extends State<AddQuestion> {
           child: CircularProgressIndicator(),
         ),
       ) : SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: Column(
-            children: [
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Input Question" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "Question",
-                ),
-                onChanged: (val){
-                  //todo
-                  question = val;
-                },
-              ),
-              SizedBox(height: 20,),
-
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Enter Option1 " : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "Option1 (Correct Answer)",
-                ),
-                onChanged: (val){
-                  //todo
-                  option1 = val;
-                },
-              ),
-              SizedBox(height: 20,),
-
-
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Enter option2" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "option2",
-                ),
-                onChanged: (val){
-                  //todo
-                  option2 = val;
-                },
-              ),
-              SizedBox(height: 20,),
-
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Enter option3" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "option3",
-                ),
-                onChanged: (val){
-                  //todo
-                  option3 = val;
-                },
-              ),
-              SizedBox(height: 20,),
-
-              TextFormField(
-                validator: (val){
-                  return val.isEmpty ?  "Enter option4" : null;
-                },
-                decoration: InputDecoration(
-                  hintText: "option4",
-                ),
-                onChanged: (val){
-                  //todo
-                  option4 = val;
-                },
-              ),
-              SizedBox(height: 180,),
-
-              Wrap(
-                  direction: Axis.horizontal,
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: blueButton(
-                        context:  context,
-                        input: "Submit",
-                      buttonWidth: MediaQuery.of(context).size.width/2 - 48
-                    ),
+        child: Form(
+          key: _formKey,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (val){
+                    return val.isEmpty ?  "Input Question" : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Question",
                   ),
-                  SizedBox(width: 24,),
-                  GestureDetector(
-                    onTap: (){
-                      //todo
-                      uploadQuestionData();
-                    },
-                    child: blueButton(
-                        context:  context,
-                        input: "Add Question",
+                  onChanged: (val){
+                    //todo
+                    question = val;
+                  },
+                ),
+                SizedBox(height: 20,),
+
+                TextFormField(
+                  validator: (val){
+                    return val.isEmpty ?  "Enter Option1 " : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Option1 (Correct Answer)",
+                  ),
+                  onChanged: (val){
+                    //todo
+                    option1 = val;
+                  },
+                ),
+                SizedBox(height: 20,),
+
+
+                TextFormField(
+                  validator: (val){
+                    return val.isEmpty ?  "Enter option2" : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "option2",
+                  ),
+                  onChanged: (val){
+                    //todo
+                    option2 = val;
+                  },
+                ),
+                SizedBox(height: 20,),
+
+                TextFormField(
+                  validator: (val){
+                    return val.isEmpty ?  "Enter option3" : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "option3",
+                  ),
+                  onChanged: (val){
+                    //todo
+                    option3 = val;
+                  },
+                ),
+                SizedBox(height: 20,),
+
+                TextFormField(
+                  validator: (val){
+                    return val.isEmpty ?  "Enter option4" : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "option4",
+                  ),
+                  onChanged: (val){
+                    //todo
+                    option4 = val;
+                  },
+                ),
+                SizedBox(height: 180,),
+
+                Wrap(
+                    direction: Axis.horizontal,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: blueButton(
+                          context:  context,
+                          input: "Submit",
                         buttonWidth: MediaQuery.of(context).size.width/2 - 48
+                      ),
                     ),
-                  )
-                ],
-              )
-            ],
+                    SizedBox(width: 24,),
+                    GestureDetector(
+                      onTap: (){
+                        //todo
+                        uploadQuestionData();
+                      },
+                      child: blueButton(
+                          context:  context,
+                          input: "Add Question",
+                          buttonWidth: MediaQuery.of(context).size.width/2 - 48
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

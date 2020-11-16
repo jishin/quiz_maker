@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class DatabaseService{
   Future<void> addQuizData(Map quizData, String quizId) async{
@@ -16,6 +15,11 @@ class DatabaseService{
         .catchError((e){
           print(e.toString());
     });
+  }
+
+  getQUizData() async{
+    return FirebaseFirestore.instance.collection("Quiz")
+        .snapshots();
   }
 }
 
