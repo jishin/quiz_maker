@@ -72,7 +72,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                       hintText: "Quiz Image Url",
                     ),
                     onChanged: (val){
-                      //todo
                       quizImageUrl = val;
                     },
                   ),
@@ -86,7 +85,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                       hintText: "Quiz Title",
                     ),
                     onChanged: (val){
-                      //todo
                       quizTitle = val;
                     },
                   ),
@@ -100,7 +98,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                       hintText: "Enter Description",
                     ),
                     onChanged: (val){
-                      //todo
                       quizDescription = val;
                     },
                   ),

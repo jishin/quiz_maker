@@ -68,7 +68,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     hintText: "Question",
                   ),
                   onChanged: (val){
-                    //todo
                     question = val;
                   },
                 ),
@@ -82,7 +81,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     hintText: "Option1 (Correct Answer)",
                   ),
                   onChanged: (val){
-                    //todo
                     option1 = val;
                   },
                 ),
@@ -97,7 +95,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     hintText: "option2",
                   ),
                   onChanged: (val){
-                    //todo
                     option2 = val;
                   },
                 ),
@@ -111,7 +108,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     hintText: "option3",
                   ),
                   onChanged: (val){
-                    //todo
                     option3 = val;
                   },
                 ),
@@ -125,7 +121,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     hintText: "option4",
                   ),
                   onChanged: (val){
-                    //todo
                     option4 = val;
                   },
                 ),
@@ -147,7 +142,6 @@ class _AddQuestionState extends State<AddQuestion> {
                     SizedBox(width: 24,),
                     GestureDetector(
                       onTap: (){
-                        //todo
                         uploadQuestionData();
                       },
                       child: blueButton(
